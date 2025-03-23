@@ -19,7 +19,7 @@
 - `integrations/`: API utilities for Vertex, Gemini, and Cohere
 
 ## ✨ Team
-- Stephanny Sanchez 🌟
-- Emma Hua 🌟
-- Adeola Omojola 🌟
+- Stephanny Sanchez 🇳🇬 🇨🇦
+- Emma Hua 🌟 🇻🇳 🇨🇦
+- Adeola Omojola 🌟 🇻🇪 🇵🇪
 
