@@ -19,4 +19,5 @@
 - `integrations/`: API utilities for Vertex, Gemini, and Cohere
 
 ## ✨ Team
-Led by a visionary in AI advancing women's health diagnostics 🌟.
+- Stephanny Sanchez 🌟
+
