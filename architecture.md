@@ -1,84 +1,104 @@
-#🧠 GynAI – AI Architecture Overview
-🔹 1. Input Layer – Data Collection
-## User Inputs:
+# 🧠 GynAI – AI Architecture Overview
 
-Demographics: age, sex assigned at birth, gender identity, menstrual cycle, weight, etc.
+## 🔹 1. Input Layer – Data Collection
 
-Symptoms: chest pressure, fatigue, anxiety, dizziness, irregular periods, cold intolerance, etc.
+### 👤 User Inputs:
+- **Demographics:** age, sex assigned at birth, gender identity, menstrual cycle, weight, etc.
+- **Symptoms:** chest pressure, fatigue, anxiety, dizziness, irregular periods, cold intolerance, etc.
+- **Medical Records:** blood pressure, TSH, T3, T4, glucose, IgE, cholesterol, etc.
 
-Medical Records: blood pressure, TSH, T3, T4, glucose, IgE, cholesterol, etc.
+### 🔐 Security & Format:
+- Inputs stored temporarily (if needed), with **encryption**
+- Optional **on-device inference** depending on platform
 
-Security & Format: Inputs stored temporarily (if needed), with encryption and optional on-device inference (depending on platform).
+---
 
-## Preprocessing Layer
-Normalization of lab values into standardized units (SI, US).
+## 🔹 2. Preprocessing Layer
 
-Contextual Embedding for symptoms (using medical term embeddings or sentence encoders like BioBERT or ClinicalBERT).
+### 🧪 Data Handling:
+- **Normalization** of lab values into standardized units (SI, US)
+- **Contextual Embedding** for symptoms using medical embeddings (e.g., BioBERT, ClinicalBERT)
+- **Missing Data Imputation:** mean/mode fill-in or flagging if critical
 
-Missing Data Handling: Imputation (mean/mode), or flagging if critical data is absent.
+---
 
-## Prediction Engine
-A. Symptom-Based Models
-Goal: Estimate likelihood of conditions using symptoms + risk factors.
+## 🔹 3. Prediction Engine
 
-Approach: Use logistic regression or shallow neural networks fine-tuned on simulated data (or public datasets like MIMIC-III or synthetic Canadian EMR data).
+### 🤖 A. Symptom-Based Models
+- **Goal:** Estimate likelihood of conditions using symptoms + risk factors
+- **Approach:** Logistic regression or shallow neural nets trained on synthetic EMR data (e.g., MIMIC-III, simulated Canadian datasets)
 
-Conditions covered:
+#### 🔍 Conditions Detected:
+- **Heart Attack:** gender-specific symptom profiles
+- **PCOS:** using Rotterdam criteria proxy
+- **Thyroid Disorders:** based on symptoms + labs
+- **Allergies:** symptom patterns + IgE markers
 
-Heart attack (based on gender-specific symptoms)
+---
 
-PCOS (via Rotterdam criteria proxy)
+### 🧾 B. Lab-Based Threshold Models
+Simple rule-based logic layered for validation:
 
-Thyroid issues (symptoms + lab correlation)
+| Condition         | Logic Example                                  |
+|------------------|------------------------------------------------|
+| Hypothyroidism    | TSH > X, T4 < Y                                |
+| Hypertension      | BP > 140/90                                    |
+| Diabetes          | Glucose > 126 (fasting)                        |
+| Allergies         | IgE > 100                                      |
 
-Allergies (based on symptoms and IgE)
+> 🔁 These rules **complement** the symptom-based predictions for **hybrid decision-making**.
 
-B. Lab-Based Threshold Models
-Simple Rules or Decision Trees:
+---
 
-TSH > X, T4 < Y → Likely hypothyroidism
+## 🔹 4. Natural Language Layer (LLMs)
 
-BP > 140/90 → Hypertension
+### 🧠 Models: Gemini / Cogere / GPT-type
 
-Glucose > 126 fasting → Diabetes
+**Input:** user responses, symptoms, lab data, prediction output
 
-IgE > 100 → Elevated allergy marker
+**Functions:**
+- Translate raw predictions into **plain-language explanations**
+- Auto-generate **doctor questions** (e.g., “Should I be tested for PCOS?”)
+- Answer **health-related FAQs**
 
-These are layered on top of the symptom-based predictions for hybrid validation.
+> 🧪 Example Prompt to LLM:  
+> “Explain why this user might be at risk of hypothyroidism given their lab values (TSH: 6.1, T3: low, symptoms: cold intolerance, fatigue)”
 
-🔹 4. Natural Language Layer (LLMs)
-A. Gemini / Cogere / GPT-like model
-Input: User responses, symptom descriptions, and prediction outputs.
+---
 
-Purpose:
+## 🔹 5. Output Layer – UI Feedback
 
-Translate raw predictions into plain-language explanations
+### 🧾 Risk Cards:
+- **Red** = High Risk  
+- **Yellow** = Mild Concern  
+- **Green** = Normal
 
-Generate questions for doctors (e.g., “Can I get tested for PCOS?”)
+### 🗣️ User-Facing Output:
+- Plain-language explanations of risks and conditions
+- Recommended next steps
+- “Ask your doctor” checklist auto-generated for user prep
 
-Answer health-related queries (FAQs, symptom meanings)
+---
 
-Example prompt to LLM:
-“Explain why this user might be at risk of hypothyroidism given their lab values (TSH: 6.1, T3: low, symptoms: cold intolerance, fatigue)”
+## 🔹 6. Ethics & Bias Mitigation
 
-🔹 5. Output Layer – UI Feedback
-Risk levels shown with color-coded cards (Red = High risk, Yellow = Mild concern, Green = Normal)
+### ⚖️ Built-In Protections:
+- Reminder: **Predictions ≠ Diagnoses**
+- Inclusive input: asks for **gender identity**, not just binary sex
+- Monitors and adjusts for **demographic biases**
+- Avoids **sexist assumptions** (e.g., “men feel pain, women feel anxiety”)
 
-Plain language explanation of conditions and recommended next steps.
+---
 
-Bot prep section: "Ask your doctor" generated checklist.
+## 🛠️ Optional – Advanced Layer
 
-🔹 6. Ethics & Bias Mitigation
-Built-in reminders that predictions are not diagnoses
+### 📲 On-Device Inference:
+- CoreML / TensorFlow Lite for privacy
 
-Inclusive design: asks for gender identity, not just binary sex.
+### 🔁 Feedback Loop:
+- User updates confirmed diagnosis
+- Allows model **fine-tuning** (if user consent & privacy policy allows)
 
-Tracks and adjusts for demographic skews in dataset representation.
+---
 
-Avoids reinforcement of sexist/biased medical assumptions (e.g., “men feel chest pain, women just feel anxiety”).
-
-🛠️ Optional (Advanced layer)
-On-device inference for privacy (CoreML or TensorFlow Lite)
-
-Feedback loop: user updates with confirmed diagnosis → future model fine-tuning (if privacy policy allows)
-
+> 📌 *GynAI is designed for educational and assistive purposes only. No part of the system should be used as a substitute for professional medical advice.*
