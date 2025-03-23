@@ -20,4 +20,6 @@
 
 ## ✨ Team
 - Stephanny Sanchez 🌟
+- Emma Hua 🌟
+- Adeola Omojola 🌟
 
