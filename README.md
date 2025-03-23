@@ -41,7 +41,7 @@ Predictive engine: Trained on condition-specific thresholds and symptoms.
 - `integrations/`: API utilities for Vertex, Gemini, and Cohere
 
 ## ✨ Team
-- Stephanny Sanchez 🇳🇬 🇨🇦
+- Stephanny Sanchez 🌟 🇻🇪 🇵🇪
 - Emma Hua 🌟 🇻🇳 🇨🇦
-- Adeola Omojola 🌟 🇻🇪 🇵🇪
+- Adeola Omojola 🌟 🇳🇬 🇨🇦
 
