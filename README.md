@@ -1,6 +1,8 @@
 # GynAI - GenAI Genesis 2025 Hackathon 🚀💡
 **GynAI**  is an AI-powered health app designed for women, trans individuals, and anyone who wants to better understand hidden or misdiagnosed conditions before seeing a doctor, combining cutting-edge models like **Gemini AI**, **Cohere**, and **Google Vertex AI**.
 
+It is the demo link: https://youtu.be/h6bM-fQ2iC0
+
 ## 🔍 The Problem
 Many life-threatening conditions in women – like silent heart attacks, thyroid disorders, PCOS, hypertension, and allergies – go undetected or misdiagnosed for years. Most health tools don’t speak to women’s bodies or hormone variations. GynAI does.
 
